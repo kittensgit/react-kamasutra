@@ -1,13 +1,13 @@
 import React from 'react'
-import classes from './Post.module.css'
+import s from './Post.module.css'
 
-export default function Post() {
+export default function Post(props) {
     return (
-        <div className={classes.item}>
-            <img src='https://cdn-icons-png.flaticon.com/512/147/147144.png' />
-            post 1
+        <div className={s.item}>
+            <img src='https://cdn-icons-png.flaticon.com/512/147/147144.png' alt='img'/>
+            {props.message}
             <div>
-                <span>like</span>
+                <span>like</span> {props.likesCount}
             </div>
         </div>
     )
