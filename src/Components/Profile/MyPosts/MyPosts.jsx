@@ -2,14 +2,9 @@ import React from 'react'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
-export default function MyPosts() {
+export default function MyPosts(props) {
 
-    let posts=[
-        {message: "hi, how are you?", id: 1, likesCount: 12},
-        {message: "it's my first post", id: 2, likesCount: 10},
-    ]
-
-    let postsElement = posts.map( p =>  <Post message={p.message} likesCount={p.likesCount} /> );
+    let postsElement = props.posts.map( p =>  <Post message={p.message} likesCount={p.likesCount} /> );
 
     return (
         <div className={s.postsBlock}>
