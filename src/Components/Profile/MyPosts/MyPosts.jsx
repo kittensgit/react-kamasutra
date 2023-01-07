@@ -10,7 +10,7 @@ export default function MyPosts(props) {
 
     let AddPost = () => {
         let text = newPostElement.current.value;
-        alert(text)
+        props.addPost(text)
     }
 
     return (

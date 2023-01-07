@@ -1,27 +1,37 @@
 let state = {
     profilePage: {
         posts: [
-            { message: "hi, how are you?", id: 1, likesCount: 12 },
-            { message: "it's my first post", id: 2, likesCount: 10 },
+            {  id: 1, message: "hi, how are you?", likesCount: 12 },
+            {  id: 2, message: "it's my first post", likesCount: 10 },
         ]
     },
     dialogsPage: {
         dialogs: [
-            { name: 'Noah', id: 1 },
-            { name: 'William', id: 2 },
-            { name: 'Michael', id: 3 },
-            { name: 'Ethan', id: 4 },
-            { name: 'Alexander', id: 5 },
-            { name: 'Jacob', id: 6 },
+            { id: 1, name: 'Noah'},
+            { id: 2, name: 'Michael'},
+            { id: 3, name: 'William'},
+            { id: 4, name: 'Ethan'},
+            { id: 5, name: 'Alexander'},
+            { id: 6, name: 'Jacob'},
         ],
         messages: [
-            { message: "Hi! It's my first message", id: 1 },
-            { message: "call me", id: 2 },
-            { message: "i'm eating right now", id: 3 },
-            { message: "cucumber", id: 4 },
-            { message: "potato", id: 5 },
+            {  id: 1, message: "Hi! It's my first message" },
+            {  id: 2, message: "call me" },
+            {  id: 3, message: "i'm eating right now" },
+            {  id: 4, message: "cucumber" },
+            {  id: 5, message: "potato" },
         ],
     }
+}
+
+export let addPost = (postMessage) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    };
+
+    state.profilePage.posts.push(newPost)
 }
 
 export default state;
