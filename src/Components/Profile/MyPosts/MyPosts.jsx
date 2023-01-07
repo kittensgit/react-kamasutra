@@ -11,6 +11,7 @@ export default function MyPosts(props) {
     let AddPost = () => {
         let text = newPostElement.current.value;
         props.addPost(text)
+        newPostElement.current.value = ''
     }
 
     return (
