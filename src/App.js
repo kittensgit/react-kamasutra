@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Dialogs from './Components/Dialogs/Dialogs';
 import Header from './Components/Header/Header';
@@ -7,7 +7,6 @@ import Profile from './Components/Profile/Profile';
 
 function App(props) {
   return (
-    <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
         <NavBar />
@@ -21,7 +20,6 @@ function App(props) {
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
   );
 }
 
