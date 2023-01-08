@@ -7,19 +7,24 @@ import Profile from './Components/Profile/Profile';
 
 function App(props) {
   return (
-      <div className='app-wrapper'>
-        <Header />
-        <NavBar />
-        <div className='app-wrapper-content'>
-          <Routes>
-            <Route path='/profile' element={<Profile state={props.state.profilePage} addPost={props.addPost}/>} /> 
-            <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage}/>} />
-            <Route path="/news" element={<Dialogs />} />
-            <Route path="/music" element={<Dialogs />} />
-            <Route path="/settings" element={<Dialogs />} />
-          </Routes>
-        </div>
+    <div className='app-wrapper'>
+      <Header />
+      <NavBar />
+      <div className='app-wrapper-content'>
+        <Routes>
+          <Route path='/profile' element={<Profile
+            profilePage={props.state.profilePage}
+            newPostText={props.state.newPostText}
+            addPost={props.addPost}
+            updateNewPostText={props.updateNewPostText}
+          />} />
+          <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage} />} />
+          <Route path="/news" element={<Dialogs />} />
+          <Route path="/music" element={<Dialogs />} />
+          <Route path="/settings" element={<Dialogs />} />
+        </Routes>
       </div>
+    </div>
   );
 }
 
