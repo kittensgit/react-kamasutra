@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import state, { subscribe } from './Components/redux/state';
+import store from './Components/redux/state';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { addPost, updateNewPostText } from './Components/redux/state';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -13,15 +12,15 @@ export let rerenderEntireTree = (state) => { // чтобы не импортир
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+                <App state={store.getState()} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>
             </BrowserRouter>
         </React.StrictMode>
     );
 }
 
 
-rerenderEntireTree(state);
+rerenderEntireTree(store.getState());
 
-subscribe(rerenderEntireTree);
+store.subscribe(rerenderEntireTree);
 
 reportWebVitals();

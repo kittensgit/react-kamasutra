@@ -7,7 +7,7 @@ function Profile(props) {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts 
+      <MyPosts
       posts={props.profilePage.posts} 
       addPost={props.addPost}
       newPostText={props.profilePage.newPostText}
