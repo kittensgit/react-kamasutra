@@ -17,9 +17,7 @@ function App(props) {
             newPostText={props.state.newPostText}
             dispatch={props.dispatch}
           />} />
-          <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage}
-            dispatch={props.dispatch}
-            newMessageText={props.state.dialogsPage.newMessageText} />} />
+          <Route path="/dialogs/*" element={<Dialogs store={props.store} />} />
           <Route path="/news" element={<Dialogs />} />
           <Route path="/music" element={<Dialogs />} />
           <Route path="/settings" element={<Dialogs />} />

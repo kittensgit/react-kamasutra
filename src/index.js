@@ -12,7 +12,7 @@ export let rerenderEntireTree = (state) => { // чтобы не импортир
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+                <App state={store.getState()} dispatch={store.dispatch.bind(store)} store={store}/>
             </BrowserRouter>
         </React.StrictMode>
     );
