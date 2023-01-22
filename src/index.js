@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import store from './Components/redux/state';
+import store from './Components/redux/redux-store';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -21,6 +21,9 @@ export let rerenderEntireTree = (state) => { // чтобы не импортир
 
 rerenderEntireTree(store.getState());
 
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderEntireTree(state);
+});
 
 reportWebVitals();
