@@ -3,7 +3,7 @@ import './App.css';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import Header from './Components/Header/Header';
 import NavBar from './Components/NavBar/NavBar';
-import Profile from './Components/Profile/Profile';
+import ProfileContainer from './Components/Profile/ProfileContainer';
 import UsersContainer from './Components/Users/UsersContainer';
 
 function App(props) {
@@ -13,7 +13,7 @@ function App(props) {
       <NavBar />
       <div className='app-wrapper-content'>
         <Routes>
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/*' element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
           <Route path="/users" element= {<UsersContainer />} />
         </Routes>
