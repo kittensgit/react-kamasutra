@@ -14,7 +14,7 @@ function ProfileInfo(props) {
             </div>
             <img src={props.profile.photos.large} alt='ava'/>
             <div className={s.descriptionBlock}>
-                <h2>full name: {props.profile.fullName}</h2>
+                <h3>name: {props.profile.fullName}</h3>
                 <p>work: {props.profile.lookingForAJobDescription}</p>
             </div>
         </div>
