@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
 import { NavLink } from 'react-router-dom';
-import { followAPI, unfollowAPI } from '../../api/api';
+import { usersAPI } from '../../api/api';
 
 export default function Users(props) {
 
@@ -30,24 +30,26 @@ export default function Users(props) {
                 </span>
                 <span>
                     {u.followed
-                        ? <button onClick={() => {
-
-                            unfollowAPI.deleteFollow(u.id)
+                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.toggleFollowingProgress(true, u.id)
+                            usersAPI.deleteFollow(u.id)
                                 .then(resultCode => {
                                     if (resultCode === 0) {
                                         props.unfollow(u.id)
                                     }
+                                    props.toggleFollowingProgress(false, u.id)
                                 });
 
                         }}>Unfollow</button>
-                        : <button onClick={() => {
-
-                            followAPI.postFollow(u.id)
-                            .then(resultCode => {
-                                if (resultCode === 0) {
-                                    props.follow(u.id)
-                                }
-                            });
+                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.toggleFollowingProgress(true, u.id)
+                            usersAPI.postFollow(u.id)
+                                .then(resultCode => {
+                                    if (resultCode === 0) {
+                                        props.follow(u.id)
+                                    }
+                                    props.toggleFollowingProgress(false, u.id)
+                                });
 
 
                         }}>Follow</button>}
