@@ -3,6 +3,7 @@ import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import { Navigate } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
 
 const Dialogs = (props) => {
 
@@ -12,18 +13,7 @@ const Dialogs = (props) => {
 
     let messagesElement = state.messages.map(m => <Message message={m.message} key={m.id} />);
 
-    let newMessageBody = state.newMessageBody;
-
-    let onSendMessageClick = () => {
-        props.sendMessage()
-    }
-
-    let onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-    }
-
-    if(!props.isAuth) return <Navigate to="/login"/>;
+    if (!props.isAuth) return <Navigate to="/login" />;
 
     return (
         <div className={s.dialogs}>
@@ -31,15 +21,36 @@ const Dialogs = (props) => {
             <div className={s.dialogsItems}>
                 {dialogsElements}
             </div>
-
             <div className={s.messages}>
                 <div>{messagesElement}</div>
-                <div><textarea onChange={onNewMessageChange} value={newMessageBody} placeholder="Enter your message"/></div>
-                <div><button onClick={onSendMessageClick}>Send</button></div>
             </div>
+
+            <AddMessageForm sendMessage={props.sendMessage}/>
 
         </div>
     )
+}
+
+const AddMessageForm = (props) => {
+    return (<div>
+
+        <Formik initialValues={{
+            newMessageBody: ''
+        }}
+            onSubmit={(values) => {
+                props.sendMessage(values.newMessageBody)
+            }}>
+            {({ handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
+                    <div>
+                        <Field as='textarea' name={'newMessageBody'} placeholder='Enter your message'></Field>
+                    </div>
+                    <button type={'submit'}>send</button>
+                </Form>
+            )}
+        </Formik>
+
+    </div>)
 }
 
 export default Dialogs;
