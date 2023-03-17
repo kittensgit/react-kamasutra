@@ -1,9 +1,17 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { connect } from "react-redux";
 import loginFormSchema from "../../utils/validators/LoginFormSchema";
-import s from './Login.module.css'
+import s from './Login.module.css';
+import { login, logout } from "../../redux/auth-reducer";
+import { Navigate } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
+
+    if (props.isAuth) {
+        return <Navigate to='/profile' />
+    }
+
     return <div>
         <h1>Login</h1>
         <Formik
@@ -13,21 +21,23 @@ const Login = () => {
                 rememberMe: false
             }}
             onSubmit={(values) => {
-                console.log(values)
+                props.login(values.email, values.password, values.rememberMe)
             }}
             validationSchema={loginFormSchema}
-            >
+        >
             {({ handleSubmit, errors, touched }) => (
                 <Form onSubmit={handleSubmit}>
                     <div>
-                        <Field type={'text'} name={'email'} placeholder={'e-mail'} className={errors.email && touched.email ? `${s.field}` : ''}/>
+                        <Field type={'text'} name={'email'} placeholder={'e-mail'}
+                            className={errors.email && touched.email ? `${s.field}` : ''} />
                     </div>
-                    <ErrorMessage name="email" component="div" className={s.error}/>
+                    <ErrorMessage name="email" component="div" className={s.error} />
 
                     <div>
-                        <Field type={'password'} name={'password'} placeholder={'password'} className={errors.password && touched.password ? `${s.field}` : ''}/>
+                        <Field type={'password'} name={'password'} placeholder={'password'}
+                            className={errors.password && touched.password ? `${s.field}` : ''} />
                     </div>
-                    <ErrorMessage name="password" component="div" className={s.error}/>
+                    <ErrorMessage name="password" component="div" className={s.error} />
 
                     <div>
                         <Field type={'checkbox'} name={'rememberMe'} />
@@ -41,4 +51,8 @@ const Login = () => {
     </div>
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, { login, logout })(Login);

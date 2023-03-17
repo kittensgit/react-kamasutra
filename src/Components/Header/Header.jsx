@@ -7,7 +7,9 @@ function Header(props) {
 		<header className={s.header}>
 			<img src='https://upload.wikimedia.org/wikipedia/commons/d/db/Zeronet_logo.png' alt='header-img' />
 			<div className={s.loginBlock}>
-				{props.isAuth ? props.login : <NavLink to={'/login'}>login</NavLink>}
+				{props.isAuth 
+				? <div>{props.login} - <button onClick={props.logout}>log out</button></div> 
+				: <NavLink to={'/login'}>login</NavLink>}
 			</div>
 		</header>
 	)
