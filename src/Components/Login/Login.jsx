@@ -12,32 +12,22 @@ const Login = () => {
                 password: "",
                 rememberMe: false
             }}
-            validate={values => {
-                const errors = {};
-                if (!values.email) {
-                    errors.email = 'Required';
-                } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                ) {
-                    errors.email = 'Invalid email address';
-                }
-                return errors;
-            }}
             onSubmit={(values) => {
                 console.log(values)
             }}
-            validationSchema={loginFormSchema}>
-            {({ handleSubmit }) => (
+            validationSchema={loginFormSchema}
+            >
+            {({ handleSubmit, errors, touched }) => (
                 <Form onSubmit={handleSubmit}>
                     <div>
-                        <Field type={'text'} name={'email'} placeholder={'e-mail'} />
+                        <Field type={'text'} name={'email'} placeholder={'e-mail'} className={errors.email && touched.email ? `${s.field}` : ''}/>
                     </div>
                     <ErrorMessage name="email" component="div" className={s.error}/>
 
                     <div>
-                        <Field type={'password'} name={'password'} placeholder={'password'} />
+                        <Field type={'password'} name={'password'} placeholder={'password'} className={errors.password && touched.password ? `${s.field}` : ''}/>
                     </div>
-                    <ErrorMessage name="password" component="div" />
+                    <ErrorMessage name="password" component="div" className={s.error}/>
 
                     <div>
                         <Field type={'checkbox'} name={'rememberMe'} />

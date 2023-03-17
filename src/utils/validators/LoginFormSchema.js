@@ -6,9 +6,10 @@ const loginFormSchema = Yup.object().shape({
         .min(2, "Must be longer than 2 characters")
         //максимальная длина - 20 символов
         .max(20, "Nice try, nobody has a first name that long")
-        .required("Required"),
-    password: Yup.string()
-        .min(8, "Must be longer than 8 characters")
         .required("Required")
+        .email('Invalid email address'),
+    password: Yup.string()
+        .required("Required")
+        .min(8, "Must be longer than 8 characters")
 });
 export default loginFormSchema;

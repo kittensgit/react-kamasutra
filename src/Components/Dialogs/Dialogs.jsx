@@ -3,7 +3,7 @@ import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import { Navigate } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import AddMessageForm from "./DialogForm/AddMessageForm";
 
 const Dialogs = (props) => {
 
@@ -25,32 +25,10 @@ const Dialogs = (props) => {
                 <div>{messagesElement}</div>
             </div>
 
-            <AddMessageForm sendMessage={props.sendMessage}/>
+            <AddMessageForm sendMessage={props.sendMessage} />
 
         </div>
     )
-}
-
-const AddMessageForm = (props) => {
-    return (<div>
-
-        <Formik initialValues={{
-            newMessageBody: ''
-        }}
-            onSubmit={(values) => {
-                props.sendMessage(values.newMessageBody)
-            }}>
-            {({ handleSubmit }) => (
-                <Form onSubmit={handleSubmit}>
-                    <div>
-                        <Field as='textarea' name={'newMessageBody'} placeholder='Enter your message'></Field>
-                    </div>
-                    <button type={'submit'}>send</button>
-                </Form>
-            )}
-        </Formik>
-
-    </div>)
 }
 
 export default Dialogs;

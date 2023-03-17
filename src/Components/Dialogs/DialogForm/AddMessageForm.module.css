@@ -1,6 +1,7 @@
-.error {
-    color: red;
-}
 .field {
     border: 2px solid red;
+}
+
+.errorMes {
+    color: red;
 }
