@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 const Login = (props) => {
 
     if (props.isAuth) {
-        return <Navigate to='/profile' />
+        return <Navigate to='/profile/*' />
     }
 
     return <div>
@@ -20,12 +20,13 @@ const Login = (props) => {
                 password: "",
                 rememberMe: false
             }}
-            onSubmit={(values) => {
-                props.login(values.email, values.password, values.rememberMe)
+            onSubmit={(values, { setSubmitting, setStatus }) => {
+                props.login(values.email, values.password, values.rememberMe, setStatus);
+                setSubmitting(false)
             }}
             validationSchema={loginFormSchema}
         >
-            {({ handleSubmit, errors, touched }) => (
+            {({ handleSubmit, errors, touched, status }) => (
                 <Form onSubmit={handleSubmit}>
                     <div>
                         <Field type={'text'} name={'email'} placeholder={'e-mail'}
@@ -42,6 +43,11 @@ const Login = (props) => {
                     <div>
                         <Field type={'checkbox'} name={'rememberMe'} />
                         <label htmlFor={'rememberMe'}> remember me </label>
+                    </div>
+
+
+                    <div className={s.status}>
+                        {status}
                     </div>
 
                     <button type={'submit'}>Log in</button>

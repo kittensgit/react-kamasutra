@@ -4,3 +4,6 @@
 .field {
     border: 2px solid red;
 }
+.status {
+    color: red;
+}
