@@ -7,6 +7,8 @@ function ProfileInfo(props) {
         return <Preloader />
     }
 
+    debugger;
+
     return (
         <div>
             {/* <div>
