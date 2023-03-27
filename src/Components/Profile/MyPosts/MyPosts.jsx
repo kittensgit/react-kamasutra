@@ -3,21 +3,19 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import AddNewPostForm from './PostForm/AddNewPostForm';
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
+        let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />);
+        return (
+            <div className={s.postsBlock}>
+                <h2>my posts</h2>
 
-    let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />);
+                <AddNewPostForm addPost={props.addPost} />
 
-    return (
-        <div className={s.postsBlock}>
-            <h2>my posts</h2>
-
-            <AddNewPostForm addPost={props.addPost} />
-
-            <div className={s.posts}>
-                {postsElement}
+                <div className={s.posts}>
+                    {postsElement}
+                </div>
             </div>
-        </div>
-    )
-}
+        )
+})
 
 export default MyPosts;
