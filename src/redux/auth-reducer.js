@@ -1,6 +1,6 @@
 import { authAPI } from "../api/api";
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "samurai-network/auth/SET_USER_DATA";
 
 let initialState = {
     userId: null,
@@ -35,24 +35,22 @@ export const getAuthUserData = () => (dispatch) => {
         });
 }
 
-export const login = (email, password, rememberMe, setStatus) => (dispatch) => {
-    authAPI.login(email, password, rememberMe)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuthUserData())
-            } else {
-                setStatus(data.messages)
-            }
-        });
+export const login = (email, password, rememberMe, setStatus) => async (dispatch) => {
+    let response = await authAPI.login(email, password, rememberMe);
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        setStatus(response.data.messages)
+    }
 }
 
-export const logout = () => (dispatch) => {
-    authAPI.logout()
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-        });
+export const logout = () => async (dispatch) => {
+    let response = await authAPI.logout()
+
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
+
 }
 
 export default authReducer;

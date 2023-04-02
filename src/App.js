@@ -25,24 +25,20 @@ class App extends React.Component {
 
     return (
 
-      <BrowserRouter>
-        <Provider store={store}>
-          <div className='app-wrapper'>
-            <HeaderContainer />
-            <NavBar />
-            <div className='app-wrapper-content'>
-              <Routes>
-                <Route path="/profile/*" element={<ProfileContainer />} />
-                <Route path="/profile/:userId" element={<ProfileContainer />} />
-                <Route path="/dialogs/*" element={<DialogsContainer />} />
-                <Route path="/users" element={<UsersContainer />} />
-                <Route path="/login" element={<Login />} />
-              </Routes>
-            </div>
-          </div>
+      <div className='app-wrapper'>
+      <HeaderContainer />
+      <NavBar />
+      <div className='app-wrapper-content'>
+        <Routes>
+          <Route path="/profile/*" element={<ProfileContainer />} />
+          <Route path="/profile/:userId" element={<ProfileContainer />} />
+          <Route path="/dialogs/*" element={<DialogsContainer />} />
+          <Route path="/users" element={<UsersContainer />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </div>
 
-        </Provider>
-      </BrowserRouter>
     )
   }
 }
