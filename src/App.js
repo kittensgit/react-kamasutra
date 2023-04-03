@@ -2,17 +2,20 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import DialogsContainer from './Components/Dialogs/DialogsContainer';
+// import DialogsContainer from './Components/Dialogs/DialogsContainer'
 import HeaderContainer from './Components/Header/HeaderContainer';
 import Login from './Components/Login/Login';
 import NavBar from './Components/NavBar/NavBar';
-import ProfileContainer from './Components/Profile/ProfileContainer';
+// import ProfileContainer from './Components/Profile/ProfileContainer';
 import UsersContainer from './Components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './Components/common/Preloader/Preloader';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
+const DialogsContainer = React.lazy(()=>import('./Components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(()=>import('./Components/Profile/ProfileContainer'));
 
 class App extends React.Component {
 
@@ -32,13 +35,15 @@ class App extends React.Component {
         <HeaderContainer />
         <NavBar />
         <div className='app-wrapper-content'>
+        <React.Suspense fallback={<Preloader />}>
           <Routes>
             <Route path="/profile/*" element={<ProfileContainer />} />
             <Route path="/profile/:userId" element={<ProfileContainer />} />
-            <Route path="/dialogs/*" element={<DialogsContainer />} />
+            <Route path="/dialogs/*" element={<DialogsContainer/>} />
             <Route path="/users" element={<UsersContainer />} />
             <Route path="/login" element={<Login />} />
           </Routes>
+          </React.Suspense>
         </div>
       </div>
 
