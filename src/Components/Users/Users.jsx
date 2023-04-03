@@ -6,7 +6,7 @@ export default function Users({ currentPage, totalUsersCount, pageSize, onPageCh
 
     return (<div>
         <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
-            totalUsersCount={totalUsersCount} pageSize={pageSize} />
+            totalItemsCount={totalUsersCount} pageSize={pageSize} />
         {
             users.map(u => <User user={u} key={u.id} followingInProgress={followingInProgress} 
                 follow={follow} unfollow={unfollow} />)
