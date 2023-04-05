@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 // import DialogsContainer from './Components/Dialogs/DialogsContainer'
 import HeaderContainer from './Components/Header/HeaderContainer';
@@ -11,11 +11,11 @@ import UsersContainer from './Components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './Components/common/Preloader/Preloader';
 import store from './redux/redux-store';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-const DialogsContainer = React.lazy(()=>import('./Components/Dialogs/DialogsContainer'));
-const ProfileContainer = React.lazy(()=>import('./Components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 
 class App extends React.Component {
 
@@ -35,14 +35,14 @@ class App extends React.Component {
         <HeaderContainer />
         <NavBar />
         <div className='app-wrapper-content'>
-        <React.Suspense fallback={<Preloader />}>
-          <Routes>
-            <Route path="/profile/*" element={<ProfileContainer />} />
-            <Route path="/profile/:userId" element={<ProfileContainer />} />
-            <Route path="/dialogs/*" element={<DialogsContainer/>} />
-            <Route path="/users" element={<UsersContainer />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          <React.Suspense fallback={<Preloader />}>
+            <Routes>
+              <Route path="/profile/*" element={<ProfileContainer />} />
+              <Route path="/profile/:userId" element={<ProfileContainer />} />
+              <Route path="/dialogs/*" element={<DialogsContainer />} />
+              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
           </React.Suspense>
         </div>
       </div>
@@ -59,11 +59,11 @@ let AppContainer = connect(mapStateToProps, { initializeApp })(App)
 
 
 const SamuraiJsApp = (props) => {
-  return <BrowserRouter>
+  return <HashRouter>
     <Provider store={store}>
       <AppContainer />
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
 }
 
 export default SamuraiJsApp;
