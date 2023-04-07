@@ -18,10 +18,11 @@ const Login = (props) => {
             initialValues={{
                 email: "",
                 password: "",
-                rememberMe: false
+                rememberMe: false,
+                captcha: ''
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {
-                props.login(values.email, values.password, values.rememberMe, setStatus);
+                props.login(values.email, values.password, values.rememberMe, values.captcha, setStatus);
                 setSubmitting(false)
             }}
             validationSchema={loginFormSchema}
@@ -50,6 +51,9 @@ const Login = (props) => {
                         {status}
                     </div>
 
+                    {props.captchaUrl && <img src={props.captchaUrl} alt='captcha'/>}
+                    {props.captchaUrl &&  <Field type={'text'} name={'captcha'} placeholder={'symbols from image'} />}
+
                     <button type={'submit'}>Log in</button>
                 </Form>
             )}
@@ -58,6 +62,7 @@ const Login = (props) => {
 }
 
 const mapStateToProps = (state) => ({
+    captchaUrl: state.auth.captchaUrl,
     isAuth: state.auth.isAuth
 })
 
