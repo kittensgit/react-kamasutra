@@ -6,7 +6,7 @@ import AddNewPostForm from './PostForm/AddNewPostForm';
 const MyPosts = React.memo(props => {
         let postsElement = [...props.posts]
         .reverse()
-        .map(p => <Post message={p.message} likesCount={p.likesCount} />);
+        .map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>);
         return (
             <div className={s.postsBlock}>
                 <h2>my posts</h2>
