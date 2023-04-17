@@ -8,7 +8,7 @@ import Login from './Components/Login/Login';
 import NavBar from './Components/NavBar/NavBar';
 // import ProfileContainer from './Components/Profile/ProfileContainer';
 import UsersContainer from './Components/Users/UsersContainer';
-import { initializeApp } from './redux/app-reducer';
+import { initializeApp } from './redux/app-reducer.ts';
 import Preloader from './Components/common/Preloader/Preloader';
 import store from './redux/redux-store';
 // import { BrowserRouter } from 'react-router-dom';

@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from "react-redux";
 import loginFormSchema from "../../utils/validators/LoginFormSchema";
 import s from './Login.module.css';
-import { login, logout } from "../../redux/auth-reducer";
+import { login, logout } from "../../redux/auth-reducer.ts";
 import { Navigate } from "react-router-dom";
 
 const Login = (props) => {
