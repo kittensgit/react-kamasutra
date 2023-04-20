@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile } from "../../redux/profile-reducer";
+import { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile } from "../../redux/profile-reducer.ts";
 import {
     useLocation,
     useNavigate,

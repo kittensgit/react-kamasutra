@@ -7,10 +7,10 @@ import HeaderContainer from './Components/Header/HeaderContainer';
 import Login from './Components/Login/Login';
 import NavBar from './Components/NavBar/NavBar';
 // import ProfileContainer from './Components/Profile/ProfileContainer';
-import UsersContainer from './Components/Users/UsersContainer';
+import UsersContainer from './Components/Users/UsersContainer.tsx';
 import { initializeApp } from './redux/app-reducer.ts';
 import Preloader from './Components/common/Preloader/Preloader';
-import store from './redux/redux-store';
+import store from './redux/redux-store.ts';
 // import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -40,7 +40,7 @@ class App extends React.Component {
               <Route path="/profile/*" element={<ProfileContainer />} />
               <Route path="/profile/:userId" element={<ProfileContainer />} />
               <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/users" element={<UsersContainer pageTitle={'Samurai'} />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </React.Suspense>
