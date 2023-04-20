@@ -1,4 +1,5 @@
-import { profileAPI, usersAPI } from "../api/api";
+//@ts-ignore
+import { profileAPI, usersAPI } from "../api/api.ts";
 import { PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = "ADD-POST";

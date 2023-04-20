@@ -1,4 +1,7 @@
-import { authAPI, securityAPI } from "../api/api";
+//@ts-ignore
+import { ResultCodeEnumForCaptcha, ResultCodesEnum, authAPI, securityAPI } from "../api/api.ts";
+import { ThunkAction } from "redux-thunk";
+import { AppStateType } from "./redux-store";
 
 const SET_USER_DATA = "samurai-network/auth/SET_USER_DATA";
 const GET_CAPTCHA_URL_SUCCESS = "GET_CAPTCHA_URL_SUCCESS";
@@ -21,7 +24,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState;
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -38,6 +41,19 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
     }
 }
 
+type ActionsTypes = SetAuthUserDataActionType | GetCaptchaUrlSuccessActionType;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+
+type SetAuthUserDataActionType = {
+    type: typeof SET_USER_DATA,
+    payload: SetAuthUserDataPayloadType
+}
+
+type GetCaptchaUrlSuccessActionType = {
+    type: typeof GET_CAPTCHA_URL_SUCCESS,
+    payload: { captchaUrl: string }
+}
+
 type SetAuthUserDataPayloadType = {
     userId: number | null,
     email: string | null,
@@ -45,57 +61,50 @@ type SetAuthUserDataPayloadType = {
     isAuth: boolean
 }
 
-type SetAuthUserDataActionType = {
-    type: typeof SET_USER_DATA,
-    payload: SetAuthUserDataPayloadType
-}
 
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataActionType => ({
     type: SET_USER_DATA,
     payload: { userId, email, login, isAuth }
 })
 
-type GetCaptchaUrlSuccessActionType = {
-    type: typeof SET_USER_DATA,
-    payload: { captchaUrl: string }
-}
 
 export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessActionType => ({
-    type: SET_USER_DATA,
+    type: GET_CAPTCHA_URL_SUCCESS,
     payload: { captchaUrl }
 })
-export const getAuthUserData = () => (dispatch: any) => {
-    return authAPI.me()
-        .then(data => {
-            if (data.resultCode === 0) {
-                let { id, email, login } = data.data;
-                dispatch(setAuthUserData(id, email, login, true))
-            }
-        });
+
+
+export const getAuthUserData = (): ThunkType => async (dispatch) => {
+    let meData = await authAPI.me()
+    if (meData.resultCode === ResultCodesEnum.Success) {
+        let { id, email, login } = meData.data;
+        dispatch(setAuthUserData(id, email, login, true))
+    }
+
 }
 
-export const login = (email: string, password: any, rememberMe: boolean, captcha: undefined | null, setStatus: any) => async (dispatch: any) => {
-    let response = await authAPI.login(email, password, rememberMe, captcha);
-    if (response.data.resultCode === 0) {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: undefined | null, setStatus: any): ThunkType => async (dispatch) => {
+    let loginData = await authAPI.login(email, password, rememberMe, captcha);
+    if (loginData.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData())
     } else {
-        if (response.data.resultCode === 10) {
+        if (loginData.resultCode === ResultCodeEnumForCaptcha.CaptchaIsRequired) {
             dispatch(getCaptchaUrl())
         }
-        setStatus(response.data.messages)
+        setStatus(loginData.messages)
     }
 }
 
-export const getCaptchaUrl = () => async (dispatch: any) => {
+export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
     const response = await securityAPI.getCaptchaUrl();
     const captchaUrl = response.data.url;
     dispatch(getCaptchaUrlSuccess(captchaUrl))
 }
 
-export const logout = () => async (dispatch: any) => {
+export const logout = (): ThunkType => async (dispatch) => {
     let response = await authAPI.logout()
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserData(null, null, null, false))
     }
 

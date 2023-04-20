@@ -1,5 +1,6 @@
 import { ThunkAction } from "redux-thunk";
-import { usersAPI } from "../api/api";
+//@ts-ignore
+import { usersAPI } from "../api/api.ts";
 import { UserType } from "../types/types";
 import { updateObjectInArray } from "../utils/validators/object-helpers";
 import { AppStateType } from "./redux-store";

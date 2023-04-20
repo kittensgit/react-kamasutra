@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
+//@ts-ignore
 import { addPostActionCreator } from '../../../redux/profile-reducer.ts';
-import MyPosts from './MyPosts.tsx';
+//@ts-ignore
+import MyPosts from './MyPosts.jsx';
 import { PostType } from '../../../types/types.js';
+//@ts-ignore
 import { AppStateType } from "../../../redux/redux-store.ts";
 
 type MapStatePropsType = {

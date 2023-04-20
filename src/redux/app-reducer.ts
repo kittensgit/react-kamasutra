@@ -1,3 +1,4 @@
+//@ts-ignore
 import { getAuthUserData } from "./auth-reducer.ts";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
@@ -10,7 +11,7 @@ let initialState: InitialStateType = {
     initialized: false
 }
 
-const appReducer = (state = initialState, action: any): InitialStateType => {
+const appReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -21,6 +22,8 @@ const appReducer = (state = initialState, action: any): InitialStateType => {
             return state;
     }
 }
+
+type ActionsTypes = InitializedSuccessActionType;
 
 type InitializedSuccessActionType = {
     type: typeof INITIALIZED_SUCCESS
