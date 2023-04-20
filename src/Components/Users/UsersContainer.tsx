@@ -22,7 +22,6 @@ type MapDispatchPropsType = {
     setCurrentPage: (pageNumber) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    
 }
 
 type OwnPropsType = {
