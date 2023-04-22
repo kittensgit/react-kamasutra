@@ -83,7 +83,7 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
 
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: undefined | null, setStatus: any): ThunkType => async (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null, setStatus: any): ThunkType => async (dispatch) => {
     let loginData = await authAPI.login(email, password, rememberMe, captcha);
     if (loginData.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData())
@@ -96,18 +96,15 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 }
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
-    const response = await securityAPI.getCaptchaUrl();
-    const captchaUrl = response.data.url;
-    dispatch(getCaptchaUrlSuccess(captchaUrl))
+    const captchaData = await securityAPI.getCaptchaUrl();
+    dispatch(getCaptchaUrlSuccess(captchaData.url))
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-    let response = await authAPI.logout()
-
-    if (response.data.resultCode === ResultCodesEnum.Success) {
+    let logoutData = await authAPI.logout();
+    if (logoutData.resultCode === ResultCodesEnum.Error) {
         dispatch(setAuthUserData(null, null, null, false))
     }
-
 }
 
 export default authReducer;

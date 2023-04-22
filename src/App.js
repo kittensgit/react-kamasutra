@@ -4,7 +4,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 // import DialogsContainer from './Components/Dialogs/DialogsContainer'
 import HeaderContainer from './Components/Header/HeaderContainer';
-import Login from './Components/Login/Login';
+import Login from './Components/Login/Login.tsx';
 import NavBar from './Components/NavBar/NavBar';
 // import ProfileContainer from './Components/Profile/ProfileContainer';
 import UsersContainer from './Components/Users/UsersContainer.tsx';

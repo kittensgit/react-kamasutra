@@ -7,7 +7,7 @@ const instance = axios.create({
     headers: {
         'API-KEY': 'af568e28-0281-4b25-a3db-271c594f4039'
     }
-})
+});
 
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
@@ -77,6 +77,15 @@ type LoginResponseType = {
     messages: Array<string>
 }
 
+type LogoutResponseType = {
+    data: {}
+    resultCode: ResultCodesEnum
+    messages: Array<string>
+}
+
+type CaptchaResponseType = {
+    url: string
+}
 
 export const authAPI = {
     me() {
@@ -86,12 +95,12 @@ export const authAPI = {
         return instance.post<LoginResponseType>(`auth/login`, { email, password, rememberMe, captcha }).then(res => res.data)
     },
     logout() {
-        return instance.delete(`auth/login`)
+        return instance.delete<LogoutResponseType>(`auth/login`).then(res => res.data)
     }
 }
 
 export const securityAPI = {
     getCaptchaUrl() {
-        return instance.get(`security/get-captcha-url`);
+        return instance.get<CaptchaResponseType>(`security/get-captcha-url`).then(res => res.data);
     }
 }
