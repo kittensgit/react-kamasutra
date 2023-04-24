@@ -1,5 +1,5 @@
 //@ts-ignore
-import { profileAPI, usersAPI } from "../api/api.ts";
+import { profileAPI } from "../api/profile-api.ts";
 import { PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = "ADD-POST";
@@ -104,36 +104,36 @@ export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType
 
 
 export const getUserProfile = (userId: number) => (dispatch: any) => {
-    usersAPI.getProfile(userId).then(data => {
+    profileAPI.getProfile(userId).then(data => {
         dispatch(setUserProfile(data));
     });
 }
 
 export const getStatus = (userId:number) => async (dispatch:any) => {
-    let response = await profileAPI.getStatus(userId);
-    dispatch(setStatus(response.data));
+    let statusData = await profileAPI.getStatus(userId);
+    dispatch(setStatus(statusData));
 
 }
 
 export const updateStatus = (status: string) => async (dispatch: any) => {
-    let response = await profileAPI.updateStatus(status)
-    if (response.data.resultCode === 0) {
+    let updateData = await profileAPI.updateStatus(status)
+    if (updateData.resultCode === 0) {
         dispatch(setStatus(status));
     }
 }
 
 
 export const savePhoto = (file: any) => async (dispatch: any) => {
-    let response = await profileAPI.savePhoto(file)
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos));
+    let saveData = await profileAPI.savePhoto(file)
+    if (saveData.resultCode === 0) {
+        dispatch(savePhotoSuccess(saveData.data.photos));
     }
 }
 
 export const saveProfile = (profile: ProfileType) => async (dispatch:any, getState: any) => {
     const userId = getState().auth.userId;
-    const response = await profileAPI.saveProfile(profile)
-    if (response.data.resultCode === 0) {
+    const data = await profileAPI.saveProfile(profile)
+    if (data.resultCode === 0) {
         dispatch(getUserProfile(userId));
     }
 }

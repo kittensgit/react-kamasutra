@@ -1,5 +1,3 @@
-const SEND_MESSAGE = "SEND-MESSAGE"
-
 type DialogItem = {
     id: number,
     name: string
@@ -32,7 +30,7 @@ export type InitialStateType = typeof initialState;
 
 const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case SEND_MESSAGE:
+        case 'SEND_MESSAGE':
             let body = action.newMessageBody;
             return {
                 ...state,
@@ -46,10 +44,10 @@ const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStat
 type ActionsTypes = sendMessageCreatorActionType;
 
 type sendMessageCreatorActionType = {
-    type: typeof SEND_MESSAGE,
+    type: 'SEND_MESSAGE',
     newMessageBody: string
 }
 
-export const sendMessageCreator = (newMessageBody: string): sendMessageCreatorActionType => ({ type: SEND_MESSAGE, newMessageBody })
+export const sendMessageCreator = (newMessageBody: string): sendMessageCreatorActionType => ({ type: 'SEND_MESSAGE', newMessageBody })
 
 export default dialogsReducer;

@@ -1,6 +1,8 @@
 import { ThunkAction } from "redux-thunk";
 //@ts-ignore
-import { ResultCodesEnum, usersAPI } from "../api/api.ts";
+import { ResultCodesEnum } from "../api/api.ts";
+//@ts-ignore
+import { usersAPI } from "../api/users-api.ts";
 import { UserType } from "../types/types";
 import { updateObjectInArray } from "../utils/validators/object-helpers";
 import { AppStateType, InferActionsType } from "./redux-store";
@@ -31,7 +33,7 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
             }
         case 'SET_USERS':
             return { ...state, users: action.users }
-        case 'SET_CURRENT_PAGE':
+        case 'GET_CURRENT_PAGE':
             return { ...state, currentPage: action.currentPage }
         case 'SET_TOTAL_USERS_COUNT':
             return { ...state, totalUsersCount: action.count }
@@ -55,7 +57,7 @@ export const actions = {
     followSuccess: (userId: number) => ({ type: 'FOLLOW', userId } as const),
     unfollowSuccess: (userId: number) => ({ type: 'UNFOLLOW', userId } as const),
     setUsers: (users: Array<UserType>) => ({ type: 'SET_USERS', users } as const),
-    setCurrentPage: (currentPage: number) => ({ type: 'SET_CURRENT_PAGE', currentPage } as const),
+    getCurrentPage: (currentPage: number) => ({ type: 'GET_CURRENT_PAGE', currentPage } as const),
     setUsersTotalCount: (totalUsersCount: number) => ({ type: 'SET_TOTAL_USERS_COUNT', count: totalUsersCount } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: 'TOGGLE_IS_FETCHING', isFetching } as const),
     toggleFollowingProgress: (isFetching: boolean, userId: number) => ({ type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId } as const)
