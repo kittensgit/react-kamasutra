@@ -1,9 +1,14 @@
 import React from "react";
+//@ts-ignore
 import s from "./AddMessageForm.module.css"
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import addNewMessageFormSchema from "../../../utils/validators/AddNewMessageFormShema";
 
-const AddMessageForm = (props) => {
+type PropsType = {
+    sendMessage: (messageText: string)=>void
+}
+
+const AddMessageForm:React.FC<PropsType> = (props) => {
     return (<div>
 
         <Formik

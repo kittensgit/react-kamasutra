@@ -14,7 +14,7 @@ import store from './redux/redux-store.ts';
 // import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
+const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer.tsx'));
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 
 class App extends React.Component {

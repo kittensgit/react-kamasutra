@@ -4,16 +4,7 @@ import { ResultCodeEnumForCaptcha, ResultCodesEnum } from "../api/api.ts";
 import { authAPI } from "../api/auth-api.ts";
 //@ts-ignore
 import { securityAPI } from "../api/security-api.ts";
-import { ThunkAction } from "redux-thunk";
-import { AppStateType, InferActionsType } from "./redux-store";
-
-export type InitialStateType2 = {
-    userId: number | null,
-    email: string | null,
-    login: string | null,
-    isAuth: boolean,
-    captchaUrl: string | null
-}
+import { BaseThunkType, InferActionsType } from "./redux-store";
 
 let initialState = {
     userId: null as number | null,
@@ -23,9 +14,7 @@ let initialState = {
     captchaUrl: null as string | null
 }
 
-export type InitialStateType = typeof initialState;
-
-const authReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'SET_USER_DATA':
             return {
@@ -41,9 +30,9 @@ const authReducer = (state = initialState, action: ActionsTypes): InitialStateTy
             return state;
     }
 }
-
-type ActionsTypes = InferActionsType<typeof actions>;
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+export type InitialStateType = typeof initialState;
+type ActionsType = InferActionsType<typeof actions>;
+type ThunkType = BaseThunkType<ActionsType>;
 
 export const actions = {
     setAuthUserData: (userId: number | null, email: string | null, login: string | null, isAuth: boolean): any => ({
