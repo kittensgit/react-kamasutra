@@ -4,20 +4,29 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 // import DialogsContainer from './Components/Dialogs/DialogsContainer'
 import HeaderContainer from './Components/Header/HeaderContainer';
+//@ts-ignore
 import Login from './Components/Login/Login.tsx';
 import NavBar from './Components/NavBar/NavBar';
 // import ProfileContainer from './Components/Profile/ProfileContainer';
+//@ts-ignore
 import UsersContainer from './Components/Users/UsersContainer.tsx';
+//@ts-ignore
 import { initializeApp } from './redux/app-reducer.ts';
 import Preloader from './Components/common/Preloader/Preloader';
-import store from './redux/redux-store.ts';
+//@ts-ignore
+import store, { AppStateType } from './redux/redux-store.ts';
 // import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
+//@ts-ignore
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer.tsx'));
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 
-class App extends React.Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+  initializeApp: ()=>void
+}
+
+class App extends React.Component<MapPropsType&DispatchPropsType> {
 
   componentDidMount() {
     this.props.initializeApp()
@@ -51,14 +60,14 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized
 })
 
 let AppContainer = connect(mapStateToProps, { initializeApp })(App)
 
 
-const SamuraiJsApp = (props) => {
+const SamuraiJsApp: React.FC = () => {
   return <HashRouter>
     <Provider store={store}>
       <AppContainer />

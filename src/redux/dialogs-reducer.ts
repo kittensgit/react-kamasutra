@@ -1,11 +1,11 @@
 import { InferActionsType } from "./redux-store"
 
-type DialogItem = {
+export type DialogItem = {
     id: number,
     name: string
 }
 
-type MessageType = {
+export type MessageType = {
     id: number,
     message: string
 }

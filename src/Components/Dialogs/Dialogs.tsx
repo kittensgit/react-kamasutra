@@ -1,9 +1,11 @@
 import React from "react";
+//@ts-ignore
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import { Navigate } from "react-router-dom";
-import AddMessageForm from "./DialogForm/AddMessageForm";
+//@ts-ignore
+import AddMessageForm from "./DialogForm/AddMessageForm.tsx";
 import { InitialStateType } from "../../redux/dialogs-reducer";
 
 type PropsType = {
