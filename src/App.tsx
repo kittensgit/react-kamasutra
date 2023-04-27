@@ -19,7 +19,7 @@ import store, { AppStateType } from './redux/redux-store.ts';
 import { Provider } from 'react-redux';
 //@ts-ignore
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer.tsx'));
-const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer.tsx'));
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {

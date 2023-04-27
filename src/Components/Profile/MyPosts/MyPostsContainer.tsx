@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 //@ts-ignore
 import { actions } from '../../../redux/profile-reducer.ts';
 //@ts-ignore
-import MyPosts from './MyPosts.jsx';
-import { PostType } from '../../../types/types.js';
+import MyPosts from './MyPosts.tsx';
+//@ts-ignore
+import { PostType } from '../../../types/types.ts';
 //@ts-ignore
 import { AppStateType } from "../../../redux/redux-store.ts";
 
@@ -15,11 +16,6 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     addPost: (newPostText: string) => void
 }
-
-type OwnPropsType = {
-
-}
-
 
 const mapStateToProps = (state: AppStateType) => {
     return {
@@ -36,7 +32,7 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 const MyPostsContainer =
-    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)
+    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)
         (MyPosts)
 
 export default MyPostsContainer;

@@ -1,32 +1,49 @@
 import React from "react";
 import { Formik, Field, Form } from "formik";
+//@ts-ignore
 import s from './ProfileInfo.module.css';
+import { ContactsType, ProfileType } from "../../../types/types";
 
-const ProfileDataForm = ({ saveProfile, profile, setEditMode }) => {
+type PropsType = {
+    saveProfile: (profile: ProfileType) => void
+    profile: ProfileType
+    setEditMode: (editMode: boolean) => void
+}
 
-    let contacts = profile.contacts
+type Initial = {
+    fullName: string,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    aboutMe: string,
+    contacts: ContactsType
+}
+
+
+const ProfileDataForm: React.FC<PropsType> = ({ saveProfile, profile, setEditMode }) => {
+
+    // let contacts = profile.contacts
 
     return (
 
         <Formik
             initialValues={
                 {
-                fullName: profile.fullName,
-                lookingForAJob: profile.lookingForAJob,
-                lookingForAJobDescription: profile.lookingForAJobDescription,
-                aboutMe: profile.aboutMe,
-                contacts: {
-                    github: contacts.github,
-                    vk: contacts.vk,
-                    facebook: contacts.facebook,
-                    instagram: contacts.instagram,
-                    twitter: contacts.twitter,
-                    website: contacts.website,
-                    youtube: contacts.youtube,
-                    mainLink: contacts.mainLink
-                }
-            }}
-            onSubmit={(values) => {
+                    fullName: profile.fullName,
+                    lookingForAJob: profile.lookingForAJob,
+                    lookingForAJobDescription: profile.lookingForAJobDescription,
+                    aboutMe: profile.aboutMe,
+                    contacts: {
+                        github: profile.contacts.github,
+                        vk: profile.contacts.vk,
+                        facebook: profile.contacts.facebook,
+                        instagram: profile.contacts.instagram,
+                        twitter: profile.contacts.twitter,
+                        website: profile.contacts.website,
+                        youtube: profile.contacts.youtube,
+                        mainLink: profile.contacts.mainLink
+                    }
+                } as Initial}
+            onSubmit={(values: ProfileType) => {
                 saveProfile(values)
                 setEditMode(false)
             }}

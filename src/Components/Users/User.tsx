@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
-import styles from './User.module.css'
+//@ts-ignore
+import styles from './User.module.css';
+//@ts-ignore
 import userPhoto from '../../assets/images/user.png'
 import { NavLink } from 'react-router-dom';
 import { UserType } from '../../types/types';

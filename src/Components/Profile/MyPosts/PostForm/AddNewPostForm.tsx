@@ -1,11 +1,14 @@
 import React from "react";
 import addNewPostFormSchema from '../../../../utils/validators/AddNewPostFormSchema';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+//@ts-ignore
 import s from './AddNewPostForm.module.css';
 
+type PropsType = {
+    addPost: (newPostText: string)=>void
+}
 
-
-const AddNewPostForm = (props) => {
+const AddNewPostForm:React.FC<PropsType> = (props) => {
     return (<div>
 
         <Formik initialValues={{

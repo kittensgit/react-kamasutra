@@ -1,7 +1,13 @@
-import React from 'react'
-import s from './Post.module.css'
+import React from 'react';
+//@ts-ignore
+import s from './Post.module.css';
 
-export default function Post(props) {
+type PropsType = {
+    message: string | null
+    likesCount: number | null
+}
+
+const Post:React.FC<PropsType>=(props)=> {
     return (
         <div className={s.item}>
             <img src='https://cdn-icons-png.flaticon.com/512/147/147144.png' alt='img'/>
@@ -12,3 +18,5 @@ export default function Post(props) {
         </div>
     )
 }
+
+export default Post;

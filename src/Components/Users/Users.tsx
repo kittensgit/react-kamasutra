@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
+//@ts-ignore
 import Paginator from '../common/Paginator/Paginator.tsx';
+//@ts-ignore
 import User from './User.tsx';
 import { UserType } from '../../types/types';
 
