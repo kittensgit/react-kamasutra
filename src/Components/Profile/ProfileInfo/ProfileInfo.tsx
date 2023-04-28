@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
-import Preloader from '../../common/Preloader/Preloader';
-import ProfileStatusWithHooks from './ProfileStatusWithHooks';
+//@ts-ignore
+import Preloader from '../../common/Preloader/Preloader.tsx';
+//@ts-ignore
+import ProfileStatusWithHooks from './ProfileStatusWithHooks.tsx';
 //@ts-ignore
 import userPhoto from '../../../assets/images/user.png';
 //@ts-ignore
@@ -14,7 +16,7 @@ export type PropsType = {
     saveProfile: (profile: ProfileType) => void
     isOwner: boolean | null
     savePhoto: (file: File) => void
-    profile: ProfileType
+    profile: ProfileType | null
     status: string | null
     updateStatus: (status: string) => void
 }

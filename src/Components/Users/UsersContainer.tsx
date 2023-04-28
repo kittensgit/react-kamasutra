@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { follow, unfollow, requestUsers } from "../../redux/users-reducer.ts";
 //@ts-ignore 
 import Users from "./Users.tsx";
-import Preloader from "../common/Preloader/Preloader";
+//@ts-ignore
+import Preloader from "../common/Preloader/Preloader.tsx";
 import { compose } from "redux";
 //@ts-ignore
 import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../redux/users-selectors.ts";

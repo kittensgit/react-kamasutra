@@ -3,22 +3,26 @@ import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 // import DialogsContainer from './Components/Dialogs/DialogsContainer'
-import HeaderContainer from './Components/Header/HeaderContainer';
+//@ts-ignore
+import HeaderContainer from './Components/Header/HeaderContainer.tsx';
 //@ts-ignore
 import Login from './Components/Login/Login.tsx';
-import NavBar from './Components/NavBar/NavBar';
+//@ts-ignore
+import NavBar from './Components/NavBar/NavBar.tsx';
 // import ProfileContainer from './Components/Profile/ProfileContainer';
 //@ts-ignore
 import UsersContainer from './Components/Users/UsersContainer.tsx';
 //@ts-ignore
 import { initializeApp } from './redux/app-reducer.ts';
-import Preloader from './Components/common/Preloader/Preloader';
+//@ts-ignore
+import Preloader from './Components/common/Preloader/Preloader.tsx';
 //@ts-ignore
 import store, { AppStateType } from './redux/redux-store.ts';
 // import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 //@ts-ignore
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer.tsx'));
+//@ts-ignore
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer.tsx'));
 
 type MapPropsType = ReturnType<typeof mapStateToProps>

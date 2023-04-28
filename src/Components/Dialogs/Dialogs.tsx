@@ -1,12 +1,15 @@
 import React from "react";
 //@ts-ignore
-import s from "./Dialogs.module.css"
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
+import s from "./Dialogs.module.css";
+//@ts-ignore
+import DialogItem from "./DialogItem/DialogItem.tsx";
+//@ts-ignore
+import Message from "./Message/Message.tsx";
 import { Navigate } from "react-router-dom";
 //@ts-ignore
 import AddMessageForm from "./DialogForm/AddMessageForm.tsx";
-import { InitialStateType } from "../../redux/dialogs-reducer";
+//@ts-ignore
+import { InitialStateType } from "../../redux/dialogs-reducer.ts";
 
 type PropsType = {
     dialogsPage: InitialStateType

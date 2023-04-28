@@ -8,28 +8,32 @@ import AddNewPostForm from './PostForm/AddNewPostForm.tsx';
 //@ts-ignore
 import { PostType } from '../../../types/types.ts';
 
-type PropsType = {
+export type MapPropsType = {
     posts: Array<PostType>
-    addPost: (newPostText: string)=>void
 }
 
-const MyPosts:React.FC<PropsType> = (props => {
-        let postsElement = [...props.posts]
+export type DispatchPropsType = {
+    addPost: (newPostText: string) => void
+}
+
+
+const MyPosts: React.FC<MapPropsType & DispatchPropsType> = (props => {
+    let postsElement = [...props.posts]
         .reverse()
-        .map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>);
-        return (
-            <div className={s.postsBlock}>
-                <h2>my posts</h2>
+        .map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id} />);
+    return (
+        <div className={s.postsBlock}>
+            <h2>my posts</h2>
 
-                <AddNewPostForm addPost={props.addPost} />
+            <AddNewPostForm addPost={props.addPost} />
 
-                <div className={s.posts}>
-                    {postsElement}
-                </div>
+            <div className={s.posts}>
+                {postsElement}
             </div>
-        )
+        </div>
+    )
 })
 
-const MyPostsMemorised =  React.memo(MyPosts)
+const MyPostsMemorised = React.memo(MyPosts)
 
 export default MyPostsMemorised;

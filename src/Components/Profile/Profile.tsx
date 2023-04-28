@@ -10,7 +10,7 @@ export type PropsType = {
   saveProfile: (profile: ProfileType) => void
   isOwner: boolean | null
   savePhoto: (file: File)=> void
-  profile: ProfileType
+  profile: ProfileType | null
   status: string | null
   updateStatus: (status: string)=>void
 }

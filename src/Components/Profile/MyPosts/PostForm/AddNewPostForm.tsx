@@ -1,5 +1,6 @@
 import React from "react";
-import addNewPostFormSchema from '../../../../utils/validators/AddNewPostFormSchema';
+//@ts-ignore
+import addNewPostFormSchema from '../../../../utils/validators/AddNewPostFormSchema.ts';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 //@ts-ignore
 import s from './AddNewPostForm.module.css';

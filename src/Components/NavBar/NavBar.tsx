@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+//@ts-ignore
 import s from "./NavBar.module.css"
 
-function NavBar() {
+const  NavBar: React.FC = () => {
   return (
     <nav className={s.nav}>
       <div className={`${s.item}`}>

@@ -1,9 +1,12 @@
 import React from "react";
+//@ts-ignore
 import preloader from '../../../assets/images/preloader.gif';
 
-export default function Preloader(props) {
+const Preloader:React.FC = () => {
     return (<div>
             <img src={preloader} alt='preloader'/>
         </div>
     )
 }
+
+export default Preloader;
