@@ -6,12 +6,10 @@ import './App.css';
 //@ts-ignore
 import HeaderContainer from './Components/Header/HeaderContainer.tsx';
 //@ts-ignore
-import Login from './Components/Login/Login.tsx';
+import {LoginPage} from './Components/Login/Login.tsx';
 //@ts-ignore
 import NavBar from './Components/NavBar/NavBar.tsx';
 // import ProfileContainer from './Components/Profile/ProfileContainer';
-//@ts-ignore
-import UsersContainer from './Components/Users/UsersContainer.tsx';
 //@ts-ignore
 import { initializeApp } from './redux/app-reducer.ts';
 //@ts-ignore
@@ -20,6 +18,8 @@ import Preloader from './Components/common/Preloader/Preloader.tsx';
 import store, { AppStateType } from './redux/redux-store.ts';
 // import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+//@ts-ignore
+import { UsersPage } from './Components/Users/UsersContainer.tsx';
 //@ts-ignore
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer.tsx'));
 //@ts-ignore
@@ -53,8 +53,8 @@ class App extends React.Component<MapPropsType&DispatchPropsType> {
               <Route path="/profile/*" element={<ProfileContainer />} />
               <Route path="/profile/:userId" element={<ProfileContainer />} />
               <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/users" element={<UsersContainer pageTitle={'Samurai'} />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/users" element={<UsersPage pageTitle={'Samurai'} />} />
+              <Route path="/login" element={<LoginPage />} />
             </Routes>
           </React.Suspense>
         </div>

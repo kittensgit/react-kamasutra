@@ -1,27 +1,24 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 //@ts-ignore
 import loginFormSchema from "../../utils/validators/LoginFormSchema.ts";
 //@ts-ignore
 import s from './Login.module.css';
 //@ts-ignore
-import { login, logout } from "../../redux/auth-reducer.ts";
+import { login } from "../../redux/auth-reducer.ts";
 import { Navigate } from "react-router-dom";
 import { AppStateType } from "../../redux/redux-store";
+import { AnyAction } from "redux";
 
-type MapStatePropsType = {
-    captchaUrl: string | null
-    isAuth: boolean
-}
+export const LoginPage: React.FC = () => {
 
-type MapDispatchPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string | null, setStatus: any)=>void
-}
+    const captchaUrl = useSelector((state: AppStateType) => state.auth.captchaUrl)
+    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
 
-const Login:React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
+    const dispatch = useDispatch()
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Navigate to='/profile/*' />
     }
 
@@ -35,7 +32,7 @@ const Login:React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
                 captcha: ''
             }}
             onSubmit={(values, { setSubmitting, setStatus }): any => {
-                props.login(values.email, values.password, values.rememberMe, values.captcha, setStatus);
+                dispatch(login(values.email, values.password, values.rememberMe, values.captcha, setStatus) as unknown as AnyAction);
                 setSubmitting(false)
             }}
             validationSchema={loginFormSchema}
@@ -64,8 +61,8 @@ const Login:React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
                         {status}
                     </div>
 
-                    {props.captchaUrl && <img src={props.captchaUrl} alt='captcha'/>}
-                    {props.captchaUrl &&  <Field type={'text'} name={'captcha'} placeholder={'symbols from image'} />}
+                    {captchaUrl && <img src={captchaUrl} alt='captcha' />}
+                    {captchaUrl && <Field type={'text'} name={'captcha'} placeholder={'symbols from image'} />}
 
                     <button type={'submit'}>Log in</button>
                 </Form>
@@ -73,10 +70,3 @@ const Login:React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
         </Formik>
     </div>
 }
-
-const mapStateToProps = (state: AppStateType):MapStatePropsType => ({
-    captchaUrl: state.auth.captchaUrl,
-    isAuth: state.auth.isAuth
-})
-
-export default connect(mapStateToProps, { login, logout })(Login);
