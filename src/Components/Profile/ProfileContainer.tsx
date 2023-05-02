@@ -6,14 +6,19 @@ import Profile from "./Profile.tsx";
 import { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile } from "../../redux/profile-reducer.ts";
 import {
     useParams,
+    useNavigate
 } from "react-router-dom";
 import { compose } from "redux";
-import { AppStateType } from "../../redux/redux-store.js";
-import { ProfileType } from "../../types/types.js";
+//@ts-ignore
+import { AppStateType } from "../../redux/redux-store.ts";
+//@ts-ignore
+import { ProfileType } from "../../types/types.ts";
 
 type ParamsType = {
     userId: string | null
 }
+
+
 
 interface WithRouterProps {
     router: {
@@ -24,11 +29,12 @@ interface WithRouterProps {
 
 const withRouter = <Props extends WithRouterProps>(Component: React.ComponentType<Props>) => {
     function ComponentWithRouterProp(props: Omit<Props, keyof WithRouterProps>) {
+        let navigate = useNavigate()
         let params = useParams<ParamsType>();
         return (
             <Component
                 {...(props as Props)}
-                router={{ params }}
+                router={{ navigate, params }}
             />
         );
     }
@@ -53,7 +59,7 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             userId = this.props.authorizedUserId;
             if (!userId) {
-                // this.props.router.navigate('/login');
+                this.props.router.navigate('/login');
             }
         }
         if (!userId) {

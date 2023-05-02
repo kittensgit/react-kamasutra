@@ -15,11 +15,18 @@ import { useDispatch, useSelector } from 'react-redux';
 //@ts-ignore
 import { getCurrentPage, getPageSize, getTotalUsersCount, getUsers, getUsersFilter, getFollowingInProgress } from '../../redux/users-selectors.ts';
 import { AnyAction } from 'redux';
+import { useSearchParams } from "react-router-dom";
 
 type PropsType = {}
 
+// const useNavigateSearch = () => {
+//     const navigate = useNavigate();
+//     return (pathname, params) =>
+//         navigate(`${pathname}?${createSearchParams(params)}`);
+// };
 
-export const Users: FC<PropsType> = (props) => {
+
+export const Users: FC<PropsType> = () => {
 
     const users = useSelector(getUsers)
     const currentPage = useSelector(getCurrentPage)
@@ -30,11 +37,51 @@ export const Users: FC<PropsType> = (props) => {
 
     const dispatch = useDispatch()
 
-
+    const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
-        dispatch(requestUsers(currentPage, pageSize, filter) as unknown as AnyAction)
+        const result: any = {}
+        // @ts-ignore
+        for (const [key, value] of searchParams.entries()) {
+            let value2: any = +value
+            if (isNaN(value2)) {
+                value2 = value
+            }
+            if (value === 'true') {
+                value2 = true
+            } else if (value === 'false') {
+                value2 = false
+            }
+            result[key] = value2
+        }
+
+        let actualPage = result.page || currentPage
+        let term = result.term || filter.term
+
+        let friend = result.friend || filter.friend
+        if (result.friend === false) {
+            friend = result.friend
+        }
+
+        const actualFilter = { friend, term }
+        dispatch(requestUsers(actualPage, pageSize, actualFilter) as unknown as AnyAction)
     }, [])
+
+    useEffect(() => {
+
+        const term = filter.term
+        const friend = filter.friend
+
+        let urlQuery =
+            (term === '' ? '' : `&term=${term}`)
+            + (friend === null ? '' : `&friend=${friend}`)
+            + (currentPage === 1 ? '' : `&page=${currentPage}`)
+
+        setSearchParams(urlQuery)
+
+        // eslint-disable-next-line
+    }, [filter, currentPage])
+
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(requestUsers(pageNumber, pageSize, filter) as unknown as AnyAction)
