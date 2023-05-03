@@ -57,8 +57,8 @@ export const Users: FC<PropsType> = () => {
 
         let actualPage = result.page || currentPage
         let term = result.term || filter.term
-
         let friend = result.friend || filter.friend
+        
         if (result.friend === false) {
             friend = result.friend
         }
