@@ -18,6 +18,7 @@ import { UsersPage } from './Components/Users/UsersContainer.tsx';
 import {
   UserOutlined,
   TeamOutlined,
+  SolutionOutlined
 } from '@ant-design/icons';
 import { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
@@ -50,12 +51,17 @@ const items1: MenuItem[] = [
   getItem('Developers', 'users', <TeamOutlined />, [
     getItem(<Link to='/developers'>Developers</Link>, '3')
   ]),
+  getItem('Chat', 'users', <SolutionOutlined />, [
+    getItem(<Link to='/chat'>Chat</Link>, '4')
+  ]),
 ];
 
 //@ts-ignore
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer.tsx'));
 //@ts-ignore
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer.tsx'));
+//@ts-ignore
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage.tsx'));
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -104,6 +110,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                   <Route path="/dialogs/*" element={<DialogsContainer />} />
                   <Route path="/developers" element={<UsersPage pageTitle={'Samurai'} />} />
                   <Route path="/login" element={<LoginPage />} />
+                  <Route path="/chat" element={<ChatPage />} />
                 </Routes>
               </React.Suspense>
             </Content>
@@ -111,25 +118,6 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
         </Content>
         <Footer style={{ textAlign: 'center' }}>CREATED BY NIKA</Footer>
       </Layout>
-
-      /* 
-  <div className='app-wrapper'>
-  //   <HeaderContainer />
-  //   <NavBar />
-  //   <div className='app-wrapper-content'>
-  //     <React.Suspense fallback={<Preloader />}>
-  //       <Routes>
-  //         <Route path="/profile/*" element={<ProfileContainer />} />
-  //         <Route path="/profile/:userId" element={<ProfileContainer />} />
-  //         <Route path="/dialogs/*" element={<DialogsContainer />} />
-  //         <Route path="/users" element={<UsersPage pageTitle={'Samurai'} />} />
-  //         <Route path="/login" element={<LoginPage />} />
-  //         <Route path="*" element={<div>NOT FOUND 404<Button>OK</Button></div>} />
-  //       </Routes>
-  //     </React.Suspense>
-  //   </div>
-   </div> */
-
     )
   }
 }
