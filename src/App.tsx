@@ -3,29 +3,28 @@ import React from 'react';
 import { HashRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'antd/dist/reset.css';
-// import DialogsContainer from './Components/Dialogs/DialogsContainer'
-//@ts-ignore
-import HeaderContainer from './Components/Header/HeaderContainer.tsx';
 //@ts-ignore
 import { LoginPage } from './Components/Login/Login.tsx';
-// import ProfileContainer from './Components/Profile/ProfileContainer';
 //@ts-ignore
 import { initializeApp } from './redux/app-reducer.ts';
 //@ts-ignore
 import Preloader from './Components/common/Preloader/Preloader.tsx';
 //@ts-ignore
 import store, { AppStateType } from './redux/redux-store.ts';
-// import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 //@ts-ignore
 import { UsersPage } from './Components/Users/UsersContainer.tsx';
 
-import { UserOutlined,
+import {
+  UserOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
+import { MenuProps } from 'antd';
+import { Breadcrumb, Layout, Menu } from 'antd';
+//@ts-ignore
+import { AppHeader } from './Components/Header/Header.tsx';
+//@ts-ignore
+const { Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -51,13 +50,6 @@ const items1: MenuItem[] = [
   getItem('Developers', 'users', <TeamOutlined />, [
     getItem(<Link to='/developers'>Developers</Link>, '3')
   ]),
-];
-
-
-const items2: MenuItem[] = [
-  getItem('Dev', 'dev', <UserOutlined />, [
-    getItem(<Link to='/developers'>Developers</Link>, '4')
-  ])
 ];
 
 //@ts-ignore
@@ -87,10 +79,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
     return (
 
       <Layout>
-        <Header className="header">
-          <div className="logo" />
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} items={items2}/>
-        </Header>
+        <AppHeader />
         <Content style={{ padding: '0 50px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -115,13 +104,12 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                   <Route path="/dialogs/*" element={<DialogsContainer />} />
                   <Route path="/developers" element={<UsersPage pageTitle={'Samurai'} />} />
                   <Route path="/login" element={<LoginPage />} />
-                  <Route path="*" element={<div>NOT FOUND 404</div>} />
                 </Routes>
               </React.Suspense>
             </Content>
           </Layout>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' }}>CREATED BY NIKA</Footer>
       </Layout>
 
       /* 

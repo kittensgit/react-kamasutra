@@ -11,6 +11,7 @@ import s from './ProfileInfo.module.css';
 import ProfileDataForm from './ProfileDataForm.tsx';
 //@ts-ignore
 import { ContactsType, ProfileType } from '../../../types/types.ts';
+import { Button } from 'antd';
 
 export type PropsType = {
     saveProfile: (profile: ProfileType) => void
@@ -56,7 +57,9 @@ type ProfileDataPropsType = {
 const ProfileData: React.FC<ProfileDataPropsType> = ({ profile, isOwner, goToEditMode }) => {
     return (
         <div>
-            {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
+            {isOwner && <div>
+                <Button onClick={goToEditMode}>edit</Button>
+            </div>}
             <div>
                 <b>Full name</b>: {profile.fullName}
             </div>
