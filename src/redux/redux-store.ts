@@ -12,6 +12,8 @@ import authReducer from "./auth-reducer.ts";
 import thunk, { ThunkAction } from 'redux-thunk';
 //@ts-ignore
 import appReducer from "./app-reducer.ts";
+//@ts-ignore
+import chatReducer from "./chat-reducer.ts";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -19,7 +21,8 @@ let rootReducer = combineReducers({
     sidebar: sidebarReduser,
     usersPage: usersReducer,
     auth: authReducer,
-    app: appReducer
+    app: appReducer,
+    chat: chatReducer
 });
 
 type RootReducerType = typeof rootReducer;
